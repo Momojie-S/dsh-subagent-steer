@@ -1,0 +1,10 @@
+node_modules/
+dist-dev-*/
+lib/
+lib-tmp/
+lib-old/
+dist/
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+.env
