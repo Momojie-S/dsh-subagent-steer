@@ -1,11 +1,14 @@
 # @momojie-s/dsh-subagent-steer
 
+> **⚠️ 已废弃（2026-09-05）**：DSH 0.1.2-rc.1 移除了本插件依赖的 `ctx.subagents.followup` 服务操作，且官方 `send_message` 工具已原生覆盖同等能力（subagent 服务统一走 sendMessage，steer 语义内建）。本插件不再维护；在 0.1.2-rc.1+ 环境请直接使用官方 send_message。依赖本插件行为的部署请留在 0.1.1-rc.2 或迁移到官方工具。
+
 给正在工作的后台子agent**当轮插入新指示**:主 agent 派出去的后台子 agent 干到一半时,把纠偏/补充指令直接送进它当前这一轮(下一个动作步骤前生效),而不是排在整条指令后面干等。官方 `send_message` 的默认排队行为完全不动,本插件只新增一个 `steer_subagent` 工具。
 
 ## 环境要求
 
 - DSH `>= 0.1.0-rc.7`(已验证至 `0.1.1-rc.2`;依赖 `ctx.subagents.followup` / `interrupt`、`ctx.agents` 活体注册表、`Agent.steer` 的 next-step 插入语义)
 - 仅 host 半部,无浏览器资源;Windows/Linux 均可
+- **0.1.2-rc.1+ 不可用**:该版本移除了本插件依赖的 `ctx.subagents.followup` 服务操作(见顶部废弃声明)
 
 ## 用法
 

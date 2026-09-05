@@ -130,6 +130,17 @@ function relaySource(caller: Agent) {
  * @param config - resolved plugin config (tool naming).
  */
 export function apply(ctx: Context, config: Config): void {
+  // Deprecation guard: DSH 0.1.2-rc.1 removed ctx.subagents.followup, and
+  // the official send_message tool now covers this plugin's capability.
+  // Warn (but never throw) when the host no longer provides the required
+  // operation; the plugin stays functional on 0.1.1-rc.2 until upgrade.
+  if (typeof ctx.subagents?.followup !== 'function') {
+    try {
+      ctx.logger?.warn('[dsh-subagent-steer] DEPRECATED: this DSH version (0.1.2-rc.1+) removed ctx.subagents.followup; the official send_message tool now covers steering natively. Do not use this plugin on this host.')
+    } catch {
+      // logger unavailable - stay silent, never block plugin load
+    }
+  }
   const toolName = config.toolName ?? 'steer_subagent'
   ctx.tools.register(defineTool({
     name: toolName,
